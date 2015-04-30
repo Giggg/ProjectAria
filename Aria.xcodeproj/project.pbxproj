@@ -13,6 +13,12 @@
 		8C6576651AE24453003A4391 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C6576641AE24453003A4391 /* Images.xcassets */; };
 		8C6576681AE24453003A4391 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6576661AE24453003A4391 /* LaunchScreen.xib */; };
 		8C6576741AE24454003A4391 /* AriaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6576731AE24454003A4391 /* AriaTests.swift */; };
+		8C65767E1AE2474E003A4391 /* ExpenseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65767D1AE2474E003A4391 /* ExpenseDB.swift */; };
+		8C6576801AE813E3003A4391 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65767F1AE813E3003A4391 /* AddExpenseViewController.swift */; };
+		8C6576821AE84F2E003A4391 /* exepenseDB.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C6576811AE84F2E003A4391 /* exepenseDB.db */; };
+		8C68AEB01AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */; };
+		8CBA24EB1AEECDB400B3289E /* CurrentStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA24EA1AEECDB400B3289E /* CurrentStatusViewController.swift */; };
+		AD8BADF8E56A2350EAAB7526 /* libPods-Aria.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B4EA386B1E61D387F20C75 /* libPods-Aria.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2CFCFEB4C584709E99E5BC4E /* Pods-Aria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aria/Pods-Aria.release.xcconfig"; sourceTree = "<group>"; };
+		77B4EA386B1E61D387F20C75 /* libPods-Aria.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Aria.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6576581AE24453003A4391 /* Aria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C65765C1AE24453003A4391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C65765D1AE24453003A4391 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +44,13 @@
 		8C65766D1AE24454003A4391 /* AriaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AriaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6576721AE24454003A4391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C6576731AE24454003A4391 /* AriaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AriaTests.swift; sourceTree = "<group>"; };
+		8C65767D1AE2474E003A4391 /* ExpenseDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseDB.swift; sourceTree = "<group>"; };
+		8C65767F1AE813E3003A4391 /* AddExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
+		8C6576811AE84F2E003A4391 /* exepenseDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = exepenseDB.db; sourceTree = "<group>"; };
+		8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryTableViewController.swift; sourceTree = "<group>"; };
+		8C68AEB11AEE553E00CC5DD1 /* Aria-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aria-Bridging-Header.h"; sourceTree = "<group>"; };
+		8CBA24EA1AEECDB400B3289E /* CurrentStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentStatusViewController.swift; path = ../CurrentStatusViewController.swift; sourceTree = "<group>"; };
+		DE9CB6AD9D6686A1D47CA891 /* Pods-Aria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aria.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Aria/Pods-Aria.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8BADF8E56A2350EAAB7526 /* libPods-Aria.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35D17E85C27DF4F911C0F769 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77B4EA386B1E61D387F20C75 /* libPods-Aria.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8C65764F1AE24453003A4391 = {
 			isa = PBXGroup;
 			children = (
 				8C65765A1AE24453003A4391 /* Aria */,
 				8C6576701AE24454003A4391 /* AriaTests */,
 				8C6576591AE24453003A4391 /* Products */,
+				BC8F68785C21C9658CABDEB0 /* Pods */,
+				35D17E85C27DF4F911C0F769 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,12 +103,18 @@
 		8C65765A1AE24453003A4391 /* Aria */ = {
 			isa = PBXGroup;
 			children = (
+				8C6576811AE84F2E003A4391 /* exepenseDB.db */,
+				8CBA24EA1AEECDB400B3289E /* CurrentStatusViewController.swift */,
 				8C65765D1AE24453003A4391 /* AppDelegate.swift */,
 				8C65765F1AE24453003A4391 /* ViewController.swift */,
 				8C6576611AE24453003A4391 /* Main.storyboard */,
 				8C6576641AE24453003A4391 /* Images.xcassets */,
 				8C6576661AE24453003A4391 /* LaunchScreen.xib */,
 				8C65765B1AE24453003A4391 /* Supporting Files */,
+				8C65767D1AE2474E003A4391 /* ExpenseDB.swift */,
+				8C65767F1AE813E3003A4391 /* AddExpenseViewController.swift */,
+				8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */,
+				8C68AEB11AEE553E00CC5DD1 /* Aria-Bridging-Header.h */,
 			);
 			path = Aria;
 			sourceTree = "<group>";
@@ -112,6 +144,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BC8F68785C21C9658CABDEB0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE9CB6AD9D6686A1D47CA891 /* Pods-Aria.debug.xcconfig */,
+				2CFCFEB4C584709E99E5BC4E /* Pods-Aria.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +160,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C6576771AE24454003A4391 /* Build configuration list for PBXNativeTarget "Aria" */;
 			buildPhases = (
+				CACE655B2988836E2DA6FC4A /* Check Pods Manifest.lock */,
 				8C6576541AE24453003A4391 /* Sources */,
 				8C6576551AE24453003A4391 /* Frameworks */,
 				8C6576561AE24453003A4391 /* Resources */,
+				52279D1E251053FC8428660A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6576821AE84F2E003A4391 /* exepenseDB.db in Resources */,
 				8C6576631AE24453003A4391 /* Main.storyboard in Resources */,
 				8C6576681AE24453003A4391 /* LaunchScreen.xib in Resources */,
 				8C6576651AE24453003A4391 /* Images.xcassets in Resources */,
@@ -207,13 +251,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		52279D1E251053FC8428660A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Aria/Pods-Aria-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CACE655B2988836E2DA6FC4A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8C6576541AE24453003A4391 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8C6576601AE24453003A4391 /* ViewController.swift in Sources */,
+				8C6576801AE813E3003A4391 /* AddExpenseViewController.swift in Sources */,
 				8C65765E1AE24453003A4391 /* AppDelegate.swift in Sources */,
+				8CBA24EB1AEECDB400B3289E /* CurrentStatusViewController.swift in Sources */,
+				8C65767E1AE2474E003A4391 /* ExpenseDB.swift in Sources */,
+				8C68AEB01AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +374,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				"SWIFT_INSTALL_OBJC_HEADER[arch=*]" = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -336,21 +418,25 @@
 		};
 		8C6576781AE24454003A4391 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE9CB6AD9D6686A1D47CA891 /* Pods-Aria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Aria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Aria/Aria-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		8C6576791AE24454003A4391 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CFCFEB4C584709E99E5BC4E /* Pods-Aria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Aria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Aria/Aria-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -407,6 +493,7 @@
 				8C6576791AE24454003A4391 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C65767A1AE24454003A4391 /* Build configuration list for PBXNativeTarget "AriaTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +502,7 @@
 				8C65767C1AE24454003A4391 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
