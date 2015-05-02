@@ -16,7 +16,7 @@ class AddExpenseViewController : UIViewController {
     
     
     @IBAction func enterPressed(sender: AnyObject) {
-        sharedDBManager.addExpense( (amount_txt.text as NSString).doubleValue, InCateogry: )
+        sharedDBManager.addExpense( (amount_txt.text as NSString).doubleValue, InCategory: Category.Supermarket)
     }
     
     

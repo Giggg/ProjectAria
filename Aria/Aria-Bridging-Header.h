@@ -9,6 +9,6 @@
 #ifndef Aria_Aria_BridgingHeader_h
 #define Aria_Aria_BridgingHeader_h
 
-
+#import "FMDB.h"
 
 #endif
