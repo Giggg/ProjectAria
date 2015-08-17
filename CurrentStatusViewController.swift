@@ -60,10 +60,13 @@ class CurrentStatusModel {
     }
 
     func getTotalExpense() -> Double {
+        updateState()
         return totalExpense
     }
     
 }
+
+let sharedStatusModel = CurrentStatusModel()
 
 /*
 //QA
