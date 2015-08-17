@@ -50,7 +50,7 @@ class CurrentStatusModel {
         endOfMonth = componentsForLastDateOfMonth.day
 
         var sum:Double = 0
-        let expenseArray = sharedDBManager.getDoubleExpenseArray()
+        let expenseArray = sharedDBManager.getByMonth(NSDate()) // added support for getByMonth need to test when ready from DB NHNH
         for item in expenseArray {
             sum = sum + item
         }
