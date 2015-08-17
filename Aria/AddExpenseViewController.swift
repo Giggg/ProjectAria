@@ -17,10 +17,10 @@ class AddExpenseViewController : UIViewController {
     @IBOutlet weak var velocity_result_label: UILabel!
     
     @IBAction func enterPressed(sender: AnyObject) {
-        sharedDBManager.addExpense( (amount_txt.text as NSString).doubleValue, InCategory: Category.Supermarket)
+        sharedDBManager.addExpense( (amount_txt.text! as NSString).doubleValue, InCategory: Category.Supermarket)
         updateResults()
         
-    }
+    }//added ! after the as NHNH
     
     func updateResults () {
         result_label.text = String (format:"%f", sharedStatusModel.getTotalExpense())

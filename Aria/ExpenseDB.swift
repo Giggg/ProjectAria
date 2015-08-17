@@ -51,7 +51,7 @@ class ExpenseDBManager
         NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
             .UserDomainMask, true)
         
-        let docsDir = dirPaths[0] as! String
+        let docsDir = dirPaths[0] as NSString
         
         database_path = docsDir.stringByAppendingPathComponent("expenseDB.db")
         
@@ -59,16 +59,16 @@ class ExpenseDBManager
             
             let database_ref = FMDatabase(path: database_path as String)
             if database_ref == nil {
-                println("Error: \(database_ref.lastErrorMessage())")
+                print("Error: \(database_ref.lastErrorMessage())")
             }
             if database_ref.open() {
                 let sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
                 if !database_ref.executeStatements(sql_stmt) {
-                    println("Error: \(database_ref.lastErrorMessage())")
+                    print("Error: \(database_ref.lastErrorMessage())")
                 }
                 database_ref.close()
             } else {
-                println("Error: \(database_ref.lastErrorMessage())")
+                print("Error: \(database_ref.lastErrorMessage())")
             }
         }
     }
@@ -92,7 +92,7 @@ class ExpenseDBManager
             }
             database_ref.close()
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
         return expense_double_array
     }
@@ -110,13 +110,13 @@ class ExpenseDBManager
                 withArgumentsInArray: nil)
             
             if !result {
-                println ( "Failed to add expense to DB")
-                println("Error: \(database_ref.lastErrorMessage())")
+                print ( "Failed to add expense to DB")
+                print("Error: \(database_ref.lastErrorMessage())")
             } else {
-                println ("Expense Added")
+                print ("Expense Added")
             }
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
     }
     
