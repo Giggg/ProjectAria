@@ -15,11 +15,17 @@ class AddExpenseViewController : UIViewController {
     @IBOutlet weak var enter_btn: UIButton!
     @IBOutlet weak var result_label: UILabel!
     @IBOutlet weak var velocity_result_label: UILabel!
+    @IBOutlet weak var delete_btn: UIButton!
     
     @IBAction func enterPressed(sender: AnyObject) {
         sharedDBManager.addExpense( (amount_txt.text as NSString).doubleValue, InCategory: Category.Supermarket)
+        amount_txt.text = ""
         updateResults()
         
+    }
+    @IBAction func deletePressed(sender: AnyObject) {
+        sharedDBManager.clearDB()
+        updateResults()
     }
     
     func updateResults () {

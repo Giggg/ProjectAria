@@ -28,6 +28,9 @@ class CurrentStatusModel {
     
     func getVelocity () -> Double {
        
+        if (Double(totalExpense) == 0) {
+            return 0
+        }
         let should = (Double(day) / Double(endOfMonth))
         let spent = (Double(totalExpense) / Double(definedBudget))
         velocity = should / spent

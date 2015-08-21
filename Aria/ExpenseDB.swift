@@ -55,27 +55,42 @@ class ExpenseDBManager
         
         database_path = docsDir.stringByAppendingPathComponent("expenseDB.db")
         
-        if !filemgr.fileExistsAtPath(database_path as String) {
+        let database_ref = FMDatabase(path: database_path as String)
+        if database_ref == nil {
+            println("Error: \(database_ref.lastErrorMessage())")
+        }
+        if database_ref.open() {
+            var sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
+            if !database_ref.executeStatements(sql_stmt) {
+                println("Error: \(database_ref.lastErrorMessage())")
+            }
+            database_ref.close()
+        }
             
-            let database_ref = FMDatabase(path: database_path as String)
-            if database_ref == nil {
-                println("Error: \(database_ref.lastErrorMessage())")
-            }
-            if database_ref.open() {
-                let sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
-                if !database_ref.executeStatements(sql_stmt) {
-                    println("Error: \(database_ref.lastErrorMessage())")
-                }
-                database_ref.close()
-            } else {
-                println("Error: \(database_ref.lastErrorMessage())")
-            }
+        else {
+            println("Error: \(database_ref.lastErrorMessage())")
         }
     }
     
     func getExpenseArray() -> [Expense] {
         return self.expenseArray
     }
+
+    
+    func clearDB() {
+        let database_ref = FMDatabase(path: database_path as String)
+        
+        if database_ref.open() {
+            let sql_stmt = "DELETE from EXPENSES"
+            if !database_ref.executeUpdate(sql_stmt, withArgumentsInArray: [1]) {
+                println("Error: \(database_ref.lastErrorMessage())")
+            }
+            database_ref.close()
+        } else {
+            println("Error: \(database_ref.lastErrorMessage())")
+        }
+    }
+
     
     func getDoubleExpenseArray()-> [Double] {
         var expense_double_array : [Double] = []
