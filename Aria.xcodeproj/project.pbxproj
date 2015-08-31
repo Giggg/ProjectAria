@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C4853E81B8CFF870058A467 /* ExpenseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65767D1AE2474E003A4391 /* ExpenseDB.swift */; };
 		8C65765E1AE24453003A4391 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65765D1AE24453003A4391 /* AppDelegate.swift */; };
 		8C6576601AE24453003A4391 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65765F1AE24453003A4391 /* ViewController.swift */; };
 		8C6576631AE24453003A4391 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6576611AE24453003A4391 /* Main.storyboard */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C4853E41B8CF61F0058A467 /* libPods-Aria-FMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Aria-FMDB.a"; path = "Pods/../build/Debug-iphoneos/libPods-Aria-FMDB.a"; sourceTree = "<group>"; };
+		8C4853E71B8CF8570058A467 /* AriaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AriaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C6576581AE24453003A4391 /* Aria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C65765C1AE24453003A4391 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C65765D1AE24453003A4391 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 		8C65764F1AE24453003A4391 = {
 			isa = PBXGroup;
 			children = (
+				8C4853E41B8CF61F0058A467 /* libPods-Aria-FMDB.a */,
 				8CF8192B1AF56129008A2FDE /* libsqlite3.dylib */,
 				8C65765A1AE24453003A4391 /* Aria */,
 				8C6576701AE24454003A4391 /* AriaTests */,
@@ -118,8 +122,8 @@
 				8C6576641AE24453003A4391 /* Images.xcassets */,
 				8C6576661AE24453003A4391 /* LaunchScreen.xib */,
 				8C65765B1AE24453003A4391 /* Supporting Files */,
-				8C65767D1AE2474E003A4391 /* ExpenseDB.swift */,
 				8C65767F1AE813E3003A4391 /* AddExpenseViewController.swift */,
+				8C65767D1AE2474E003A4391 /* ExpenseDB.swift */,
 				8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */,
 				8C68AEB11AEE553E00CC5DD1 /* Aria-Bridging-Header.h */,
 			);
@@ -139,6 +143,7 @@
 			children = (
 				8C6576731AE24454003A4391 /* AriaTests.swift */,
 				8C6576711AE24454003A4391 /* Supporting Files */,
+				8C4853E71B8CF8570058A467 /* AriaTests-Bridging-Header.h */,
 			);
 			path = AriaTests;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4853E81B8CFF870058A467 /* ExpenseDB.swift in Sources */,
 				8C6576741AE24454003A4391 /* AriaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +416,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Aria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria/Aria-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Aria/Aria-Bridging-Header.h";
@@ -424,6 +434,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Aria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Aria/Aria-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Aria/Aria-Bridging-Header.h";
@@ -445,6 +459,7 @@
 				INFOPLIST_FILE = AriaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aria/Aria-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aria.app/Aria";
 			};
 			name = Debug;
@@ -460,6 +475,7 @@
 				INFOPLIST_FILE = AriaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Aria/Aria-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Aria.app/Aria";
 			};
 			name = Release;

@@ -9,28 +9,56 @@
 import UIKit
 import XCTest
 
+
 class AriaTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        sharedDBManager.addExpense(Expense(id: 1, amount: 1.0, InCategory: .Fuel, SetTimestamp: "1984-05-30 12:04"))
+        sharedDBManager.addExpense(Expense(id: 2, amount: 2.0, InCategory: .Fuel, SetTimestamp: "1984-03-02 12:04"))
+        sharedDBManager.addExpense(Expense(id: 3, amount: 3.0, InCategory: .Fuel, SetTimestamp: "1984-06-02 12:04"))
+        sharedDBManager.addExpense(Expense(id: 4, amount: 4.0, InCategory: .Fuel, SetTimestamp: "1984-06-03 12:04"))
+        sharedDBManager.addExpense(Expense(id: 5, amount: 5.0, InCategory: .Fuel, SetTimestamp: "1984-06-30 12:04"))
+        sharedDBManager.addExpense(Expense(id: 6, amount: 6.0, InCategory: .Fuel, SetTimestamp: "1984-06-01 12:04"))
+        sharedDBManager.addExpense(Expense(id: 7, amount: 7.0, InCategory: .Fuel, SetTimestamp: "1984-07-02 12:04"))
+        sharedDBManager.addExpense(Expense(id: 8, amount: 8.0, InCategory: .Fuel, SetTimestamp: "1984-07-01 12:04"))
+        
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        sharedDBManager.clearDB()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    func testSelectByMonth() {
+        let formatter = NSDateFormatter ()
+        formatter.dateFormat=Expense.DATE_FORMAT
+        let test = formatter.stringFromDate(NSDate())
+        let june = formatter.dateFromString("1984-06-01 12:04")
+        let july = formatter.dateFromString("1984-07-20 12:04")
+        let april = formatter.dateFromString("1984-04-01 12:04")
+        
+        var result = sharedDBManager.getByMonth(june!)
+        XCTAssertFalse(result?.count==0, "June test has no results")
+        XCTAssertTrue(result?.count==4, "June test didn't return enough results")
+        for curr_expense in result! {
+            XCTAssertTrue(curr_expense.amount >= 3.0 && curr_expense.amount <= 6.0, "June test returned \(curr_expense.timestamp)")
         }
+        
+        result = sharedDBManager.getByMonth(july!)
+        XCTAssertFalse(result?.count==0, "July test has no results")
+        XCTAssertTrue(result?.count==2, "June test didn't return enough results")
+        for curr_expense in result! {
+            XCTAssertTrue(curr_expense.amount >= 7.0 && curr_expense.amount <= 8.0, "June test returned \(curr_expense.timestamp)")
+        }
+
+        result = sharedDBManager.getByMonth(april!)
+        XCTAssertTrue(result?.count==0, "April test returned results")
+
+        
     }
+    
     
 }
