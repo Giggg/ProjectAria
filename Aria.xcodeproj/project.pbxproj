@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BA0A94F1B9E280C00AFF596 /* CurrentStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA24EA1AEECDB400B3289E /* CurrentStatusViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8C4853E81B8CFF870058A467 /* ExpenseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65767D1AE2474E003A4391 /* ExpenseDB.swift */; };
 		8C65765E1AE24453003A4391 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65765D1AE24453003A4391 /* AppDelegate.swift */; };
 		8C6576601AE24453003A4391 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65765F1AE24453003A4391 /* ViewController.swift */; };
@@ -219,6 +220,8 @@
 		8C6576501AE24453003A4391 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = OnBudget;
 				TargetAttributes = {
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BA0A94F1B9E280C00AFF596 /* CurrentStatusViewController.swift in Sources */,
 				8C4853E81B8CFF870058A467 /* ExpenseDB.swift in Sources */,
 				8C6576741AE24454003A4391 /* AriaTests.swift in Sources */,
 			);
