@@ -16,7 +16,8 @@ class CurrentStatusModel {
     var totalExpense:Double
     var velocity = 0.0
     var daysInMonth = 0
-    var definedBudget = 2400// GGG Initialize, and Hedge
+    var definedBudget: Double = 0
+    // GGG Initialize, and Hedge
     
 
     init () {
@@ -70,6 +71,10 @@ class CurrentStatusModel {
     func getTotalExpense() -> Double {
         updateState()
         return totalExpense
+    }
+    
+    func updateMonthlyBudget(newBudget: Double) {
+        definedBudget = newBudget
     }
     
 }
