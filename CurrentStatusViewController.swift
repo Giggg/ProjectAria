@@ -7,7 +7,7 @@ import Foundation
 
 class CurrentStatusModel {
 
-    let date = NSDate()
+    var date = NSDate()
     var calendar: NSCalendar
     
     var day: Int = 0
@@ -33,15 +33,16 @@ class CurrentStatusModel {
         }
         let should = (Double(day) / Double(endOfMonth))
         let spent = (Double(totalExpense) / Double(definedBudget))
-        velocity = should / spent
+        velocity = spent / should
         return velocity
 
     }
 
   
-    func updateState() { // GGG need to understand how it reads the DB
+    func updateState(for_date: NSDate = NSDate()) { // GGG need to understand how it reads the DB
+        
         calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit, fromDate: date)
+        let components = calendar.components([.NSDayCalendarUnit, .NSMonthCalendarUnit, .NSYearCalendarUnit], fromDate: for_date)
         let month: Int = components.month
         let year: Int = components.year
         day = components.day
@@ -49,7 +50,7 @@ class CurrentStatusModel {
         components.month  += 1
         components.day     = 0
         let lastDateOfMonth: NSDate = calendar.dateFromComponents(components)!
-        let componentsForLastDateOfMonth = calendar.components( .DayCalendarUnit , fromDate: lastDateOfMonth)
+        let componentsForLastDateOfMonth = calendar.components( .NSDayCalendarUnit , fromDate: lastDateOfMonth)
         endOfMonth = componentsForLastDateOfMonth.day
 
         var sum:Double = 0
@@ -59,7 +60,7 @@ class CurrentStatusModel {
         }
         totalExpense = sum
         daysInMonth = endOfMonth
-        println(sum)
+        print(sum)
     }
 
     func getTotalExpense() -> Double {

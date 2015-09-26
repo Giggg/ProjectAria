@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExpenseHistoryTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class ExpenseHistoryTableViewController: UITableViewController {
     @IBOutlet var expenseHistoryTable: UITableView!
     
     var expenseArray: [Double] = []
@@ -34,7 +34,7 @@ class ExpenseHistoryTableViewController: UITableViewController, UITableViewDataS
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) 
         
         let row = indexPath.row
         cell.textLabel?.text = String(format:"%.1f", expenseArray[row])
@@ -46,6 +46,6 @@ class ExpenseHistoryTableViewController: UITableViewController, UITableViewDataS
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let row = indexPath.row
-        println(expenseArray[row])
+        print(expenseArray[row])
     }
 }

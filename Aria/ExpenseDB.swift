@@ -16,7 +16,7 @@ enum Category : String {case Supermarket = "Supermarket", Pharm = "Pharm", Fuel 
 struct Expense
 {
     let id: (Int);
-    let timestamp: (NSString);
+    var timestamp: (NSString);
     let amount: (Double);
     let category: Category
     static let DATE_FORMAT :(String) = "yyyy-MM-dd HH:mm" // change this string to determine the date format
@@ -28,14 +28,38 @@ struct Expense
         return date_formatter.stringFromDate(date)
     }
     
+    /* This function returns the date in a string formatted according to DB convention */
+    static func formatDate (date: NSDate)->NSString {
+        var result = ""
+        let date_formatter = NSDateFormatter()
+        result = ""
+        date_formatter.setLocalizedDateFormatFromTemplate("yyyy" )
+        result = result.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        result = result.stringByAppendingString("-")
+        date_formatter.setLocalizedDateFormatFromTemplate("MM" )
+        result = result.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        result = result.stringByAppendingString("-")
+        date_formatter.setLocalizedDateFormatFromTemplate("dd" )
+        result = result.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        result = result.stringByAppendingString(" ")
+        date_formatter.setLocalizedDateFormatFromTemplate("HH" )
+        result = result.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        result = result.stringByAppendingString(" ")
+        result = result.stringByAppendingString(":")
+        date_formatter.setLocalizedDateFormatFromTemplate("MM" )
+        result = result.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        
+        return result
+    }
+    
     /* this init function adds the current time as timestamp */
     // TODO change to unlocalized dates? for off shore purchases...
     init (id: Int, amount: Double, InCategory category:Category) {
         self.id = id; // todo: handle id synchronization with database
         self.amount = amount;
         let date_formatter = NSDateFormatter()
-        date_formatter.setLocalizedDateFormatFromTemplate(Expense.DATE_FORMAT)
-        self.timestamp = date_formatter.stringFromDate(NSDate())
+        self.timestamp = Expense.formatDate(NSDate())
+        print("Stamp: \(self.timestamp)")
         self.category = category
     }
     
@@ -48,7 +72,6 @@ struct Expense
     }
 
 
-    
     func getTimestamp() -> NSString {
         return timestamp
     }
@@ -57,7 +80,7 @@ struct Expense
 
 class ExpenseDBManager
 {
-    var database_path: String;
+    var database_path: NSURL;
     var expenseArray: [Expense] = [];
 /*    var database: FMDatabase? = nil
 
@@ -70,31 +93,33 @@ class ExpenseDBManager
     
     
     init () {
-        
+
         let filemgr = NSFileManager.defaultManager()
+        let dirPaths:NSURL?
         // TODO change directort to support files directory- no reason for the user to access the DB
-        let dirPaths =
-        NSSearchPathForDirectoriesInDomains(.DocumentDirectory,
-            .UserDomainMask, true)
-        
-        let docsDir = dirPaths[0] as! String
-        
-        database_path = docsDir.stringByAppendingPathComponent("expenseDB.db")
-        print("Database path: %s", database_path as NSString)
-        let database_ref = FMDatabase(path: database_path as String)
+//        do {
+            dirPaths = try? filemgr.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+/*        } catch {
+            print ("Error getting file directory")
+            return
+        }*/
+        assert(dirPaths != nil)
+        database_path = dirPaths!.URLByAppendingPathComponent("expenseDB.db")
+        print("Database path: %s", database_path.absoluteString, terminator: "")
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         if database_ref == nil {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
         if database_ref.open() {
-            var sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
+            let sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
             if !database_ref.executeStatements(sql_stmt) {
-                println("Error: \(database_ref.lastErrorMessage())")
+                print("Error: \(database_ref.lastErrorMessage())")
             }
             database_ref.close()
         }
             
         else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
     }
     
@@ -104,22 +129,22 @@ class ExpenseDBManager
 
     
     func clearDB() {
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         
         if database_ref.open() {
             let sql_stmt = "DELETE from EXPENSES"
             if !database_ref.executeUpdate(sql_stmt, withArgumentsInArray: [1]) {
-                println("Error: \(database_ref.lastErrorMessage())")
+                print("Error: \(database_ref.lastErrorMessage())")
             }
             database_ref.close()
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
     }
 
     func parseExpenseByID (id: Int) -> Expense? {
         var result: Expense
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
 
         
         if database_ref.open() {
@@ -142,7 +167,7 @@ class ExpenseDBManager
 
             database_ref.close()
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
             return nil
         }
         return result
@@ -150,17 +175,17 @@ class ExpenseDBManager
     
     func getByMonth (date: NSDate) -> [Expense]? {
         var result: [Expense] = []
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         let date_formatter = NSDateFormatter()
         date_formatter.dateFormat = Expense.DATE_FORMAT
         let calendar = NSCalendar.currentCalendar()
 
-        let first_day_comp = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
-        first_day_comp.setValue(1, forComponent: .CalendarUnitDay)
+        let first_day_comp = calendar.components([.Year, .Month, .Day], fromDate: date)
+        first_day_comp.setValue(1, forComponent: .Day)
         let first_day = date_formatter.stringFromDate(calendar.dateFromComponents(first_day_comp)!)
         
-        var last_day_date = calendar.dateByAddingUnit(.CalendarUnitMonth, value: 1, toDate: date, options:nil)
-        last_day_date = calendar.dateByAddingUnit(.CalendarUnitDay, value: -1, toDate: last_day_date!, options: nil)
+        var last_day_date = calendar.dateByAddingUnit(.Month, value: 1, toDate: date, options:[])
+        last_day_date = calendar.dateByAddingUnit(.Day, value: -1, toDate: last_day_date!, options: [])
         //let last_day_comp = calendar.components(.CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitYear, fromDate: last_day_date!)
         let last_day = date_formatter.stringFromDate(last_day_date!)
         
@@ -181,7 +206,7 @@ class ExpenseDBManager
             }
             database_ref.close()
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
         return result
     }
@@ -189,7 +214,7 @@ class ExpenseDBManager
     
     func getDoubleExpenseArray()-> [Double] {
         var expense_double_array : [Double] = []
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         
         if database_ref.open() {
             let querySQL = "SELECT amount FROM EXPENSES"
@@ -202,7 +227,7 @@ class ExpenseDBManager
             }
             database_ref.close()
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
         return expense_double_array
     }
@@ -210,7 +235,7 @@ class ExpenseDBManager
     /* add expense using expense object */
     func addExpense (expense_to_add: Expense) {
         self.expenseArray.append(expense_to_add)
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         
         if database_ref.open() {
             // TODO: get category from parameter & get date
@@ -220,13 +245,13 @@ class ExpenseDBManager
                 withArgumentsInArray: nil)
             
             if !result {
-                println ( "Failed to add expense to DB")
-                println("Error: \(database_ref.lastErrorMessage())")
+                print ( "Failed to add expense to DB")
+                print("Error: \(database_ref.lastErrorMessage())")
             } else {
-                println ("Expense Added")
+                print ("Expense Added")
             }
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
     }
 
@@ -235,7 +260,7 @@ class ExpenseDBManager
     func addExpense (amount:Double, InCategory category:Category) {
         let added_expense = Expense(id: self.expenseArray.count, amount:amount, InCategory: category)
         self.expenseArray.append(added_expense)
-        let database_ref = FMDatabase(path: database_path as String)
+        let database_ref = FMDatabase(path: database_path.absoluteString)
         
         if database_ref.open() {
             // TODO: get category from parameter & get date
@@ -245,13 +270,13 @@ class ExpenseDBManager
                 withArgumentsInArray: nil)
             
             if !result {
-                println ( "Failed to add expense to DB")
-                println("Error: \(database_ref.lastErrorMessage())")
+                print ( "Failed to add expense to DB")
+                print("Error: \(database_ref.lastErrorMessage())")
             } else {
-                println ("Expense Added")
+                print ("Expense Added")
             }
         } else {
-            println("Error: \(database_ref.lastErrorMessage())")
+            print("Error: \(database_ref.lastErrorMessage())")
         }
     }
     
