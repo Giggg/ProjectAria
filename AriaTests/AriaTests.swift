@@ -22,6 +22,8 @@ class AriaTests: XCTestCase {
         sharedDBManager.addExpense(Expense(id: 6, amount: 6.0, InCategory: .Fuel, SetTimestamp: "1984-06-01 12:04"))
         sharedDBManager.addExpense(Expense(id: 7, amount: 7.0, InCategory: .Fuel, SetTimestamp: "1984-07-02 12:04"))
         sharedDBManager.addExpense(Expense(id: 8, amount: 8.0, InCategory: .Fuel, SetTimestamp: "1984-07-01 12:04"))
+        sharedDBManager.addExpense(Expense(id: 9, amount: 9.0, InCategory: .Fuel, SetTimestamp: "2015-09-07 12:04"))
+        sharedDBManager.addExpense(Expense(id: 10, amount: 10.0, InCategory: .Fuel, SetTimestamp: "2015-09-05 12:04"))
         
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -60,5 +62,8 @@ class AriaTests: XCTestCase {
         
     }
     
+    func testStatusByMonth() {
+        XCTAssert(sharedStatusModel.getTotalExpense()==19.0, "StatusByMonth failed")
+    }
     
 }

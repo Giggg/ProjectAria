@@ -29,6 +29,8 @@ class AddExpenseViewController : UIViewController {
         updateResults()
     }
     
+
+    
     func updateResults () {
         result_label.text = String (format:"%f", sharedStatusModel.getTotalExpense())
         velocity_result_label.text = String (format:"%f", sharedStatusModel.getVelocity())

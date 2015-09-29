@@ -16,7 +16,8 @@ class CurrentStatusModel {
     var totalExpense:Double
     var velocity = 0.0
     var daysInMonth = 0
-    var definedBudget = 2400// GGG Initialize, and Hedge
+    var definedBudget: Double = 0
+    // GGG Initialize, and Hedge
     
 
     init () {
@@ -39,10 +40,9 @@ class CurrentStatusModel {
     }
 
   
-    func updateState(for_date: NSDate = NSDate()) { // GGG need to understand how it reads the DB
-        
+    func updateState() {
         calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.NSDayCalendarUnit, .NSMonthCalendarUnit, .NSYearCalendarUnit], fromDate: for_date)
+        let components = calendar.components([.NSDayCalendarUnit, .NSMonthCalendarUnit, .NSYearCalendarUnit], fromDate: date)
         let month: Int = components.month
         let year: Int = components.year
         day = components.day
@@ -52,12 +52,17 @@ class CurrentStatusModel {
         let lastDateOfMonth: NSDate = calendar.dateFromComponents(components)!
         let componentsForLastDateOfMonth = calendar.components( .NSDayCalendarUnit , fromDate: lastDateOfMonth)
         endOfMonth = componentsForLastDateOfMonth.day
-
+        
+        
         var sum:Double = 0
-        let expenseArray = sharedDBManager.getDoubleExpenseArray()
-        for item in expenseArray {
-            sum = sum + item
+        let expenseArray = sharedDBManager.getByMonth(date)
+        
+        if expenseArray != nil {
+            for item in expenseArray! {
+                sum = sum + item.amount
+            }
         }
+        
         totalExpense = sum
         daysInMonth = endOfMonth
         print(sum)
@@ -66,6 +71,10 @@ class CurrentStatusModel {
     func getTotalExpense() -> Double {
         updateState()
         return totalExpense
+    }
+    
+    func updateMonthlyBudget(newBudget: Double) {
+        definedBudget = newBudget
     }
     
 }
