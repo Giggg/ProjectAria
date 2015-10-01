@@ -19,6 +19,8 @@
 		8C6576801AE813E3003A4391 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C65767F1AE813E3003A4391 /* AddExpenseViewController.swift */; };
 		8C6576821AE84F2E003A4391 /* exepenseDB.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C6576811AE84F2E003A4391 /* exepenseDB.db */; };
 		8C68AEB01AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */; };
+		8C85D20F1BBC2AAD00BFFB07 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D20E1BBC2AAD00BFFB07 /* HistoryViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		8C85D2111BBD4C4900BFFB07 /* HistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C85D2101BBD4C4900BFFB07 /* HistoryTableCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8CBA24EB1AEECDB400B3289E /* CurrentStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBA24EA1AEECDB400B3289E /* CurrentStatusModel.swift */; };
 		8CF8192C1AF56129008A2FDE /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8192B1AF56129008A2FDE /* libsqlite3.dylib */; };
 		8CF8193A1AF561F1008A2FDE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF819311AF561F1008A2FDE /* FMDatabase.m */; };
@@ -56,6 +58,8 @@
 		8C6576811AE84F2E003A4391 /* exepenseDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = exepenseDB.db; sourceTree = "<group>"; };
 		8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryTableViewController.swift; sourceTree = "<group>"; };
 		8C68AEB11AEE553E00CC5DD1 /* Aria-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Aria-Bridging-Header.h"; sourceTree = "<group>"; };
+		8C85D20E1BBC2AAD00BFFB07 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		8C85D2101BBD4C4900BFFB07 /* HistoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
 		8CBA24EA1AEECDB400B3289E /* CurrentStatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentStatusModel.swift; path = ../CurrentStatusModel.swift; sourceTree = "<group>"; };
 		8CF8192B1AF56129008A2FDE /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8CF8192E1AF561F0008A2FDE /* Aria-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aria-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				8C68AEAF1AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift */,
 				8C68AEB11AEE553E00CC5DD1 /* Aria-Bridging-Header.h */,
 				2B39393F1BAB44390005BFD0 /* ConfigurationViewController.swift */,
+				8C85D20E1BBC2AAD00BFFB07 /* HistoryViewController.swift */,
+				8C85D2101BBD4C4900BFFB07 /* HistoryTableCell.swift */,
 			);
 			path = Aria;
 			sourceTree = "<group>";
@@ -283,10 +289,12 @@
 				8C6576801AE813E3003A4391 /* AddExpenseViewController.swift in Sources */,
 				8C65765E1AE24453003A4391 /* AppDelegate.swift in Sources */,
 				2B3939401BAB44390005BFD0 /* ConfigurationViewController.swift in Sources */,
+				8C85D20F1BBC2AAD00BFFB07 /* HistoryViewController.swift in Sources */,
 				8CF8193A1AF561F1008A2FDE /* FMDatabase.m in Sources */,
 				8CBA24EB1AEECDB400B3289E /* CurrentStatusModel.swift in Sources */,
 				8CF8193E1AF561F1008A2FDE /* FMDatabasePool.m in Sources */,
 				8C65767E1AE2474E003A4391 /* ExpenseDB.swift in Sources */,
+				8C85D2111BBD4C4900BFFB07 /* HistoryTableCell.swift in Sources */,
 				8CF8193B1AF561F1008A2FDE /* FMResultSet.m in Sources */,
 				8C68AEB01AEA69F000CC5DD1 /* ExpenseHistoryTableViewController.swift in Sources */,
 				8CF8193C1AF561F1008A2FDE /* FMDatabaseQueue.m in Sources */,

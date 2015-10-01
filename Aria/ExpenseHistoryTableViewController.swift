@@ -9,7 +9,7 @@
 import UIKit
 
 class ExpenseHistoryTableViewController: UITableViewController {
-    @IBOutlet var expenseHistoryTable: UITableView!
+
     
     var expenseArray: [Double] = []
     
@@ -20,8 +20,8 @@ class ExpenseHistoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        expenseHistoryTable.delegate = self
-        expenseHistoryTable.dataSource = self
+/*        expenseHistoryTable.delegate = self
+        expenseHistoryTable.dataSource = self*/
         expenseArray = sharedDBManager.getDoubleExpenseArray()
     }
     

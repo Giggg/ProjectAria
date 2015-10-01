@@ -14,7 +14,7 @@ class AriaTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        sharedDBManager.addExpense(Expense(id: 1, amount: 1.0, InCategory: .Fuel, SetTimestamp: "1984-05-30 12:04"))
+/*        sharedDBManager.addExpense(Expense(id: 1, amount: 1.0, InCategory: .Fuel, SetTimestamp: "1984-05-30 12:04"))
         sharedDBManager.addExpense(Expense(id: 2, amount: 2.0, InCategory: .Fuel, SetTimestamp: "1984-03-02 12:04"))
         sharedDBManager.addExpense(Expense(id: 3, amount: 3.0, InCategory: .Fuel, SetTimestamp: "1984-06-02 12:04"))
         sharedDBManager.addExpense(Expense(id: 4, amount: 4.0, InCategory: .Fuel, SetTimestamp: "1984-06-03 12:04"))
@@ -24,7 +24,7 @@ class AriaTests: XCTestCase {
         sharedDBManager.addExpense(Expense(id: 8, amount: 8.0, InCategory: .Fuel, SetTimestamp: "1984-07-01 12:04"))
         sharedDBManager.addExpense(Expense(id: 9, amount: 9.0, InCategory: .Fuel, SetTimestamp: "2015-09-07 12:04"))
         sharedDBManager.addExpense(Expense(id: 10, amount: 10.0, InCategory: .Fuel, SetTimestamp: "2015-09-05 12:04"))
-        
+        */
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     

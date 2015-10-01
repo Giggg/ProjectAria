@@ -7,8 +7,6 @@
 //
 
 //TODO consider changing class design, so as to accomodate a model design pattern
-// TODO consider refactoring- stop updating the local array on every action, just load from DB when needed
-
 
 import Foundation
 
@@ -19,7 +17,6 @@ struct Expense
 {
     let id: (Int);
     var timestamp: (NSString);
-    var timestamp_unix : NSTimeInterval // the timestamp in linux time
     let amount: (Double);
     let category: Category
     static let DATE_FORMAT :(String) = "yyyy-MM-dd HH:mm" // change this string to determine the date format
@@ -60,20 +57,34 @@ struct Expense
     init (id: Int, amount: Double, InCategory category:Category) {
         self.id = id; // todo: handle id synchronization with database
         self.amount = amount;
-        let date = NSDate()
-        self.timestamp = Expense.formatDate(date)
-        self.timestamp_unix = date.timeIntervalSince1970
+        let date_formatter = NSDateFormatter()
+<<<<<<< HEAD
+        self.timestamp = Expense.formatDate(NSDate())
         print("Stamp: \(self.timestamp)")
+=======
+        self.timestamp = ""
+        date_formatter.setLocalizedDateFormatFromTemplate("yyyy")
+        self.timestamp = self.timestamp.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        self.timestamp = self.timestamp.stringByAppendingString("-")
+        date_formatter.setLocalizedDateFormatFromTemplate("MM")
+        self.timestamp = self.timestamp.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+        self.timestamp = self.timestamp.stringByAppendingString("-")
+        date_formatter.setLocalizedDateFormatFromTemplate("dd")
+        self.timestamp = self.timestamp.stringByAppendingString(date_formatter.stringFromDate(NSDate()))
+       
+        
+        //date_formatter.setLocalizedDateFormatFromTemplate(Expense.DATE_FORMAT)
+        //self.timestamp = date_formatter.stringFromDate(NSDate())
+>>>>>>> Feature-currentStatus-byMonth-swift2
         self.category = category
     }
     
     /* this init function gets the timestamp as a string from the caller */
-    init (id: Int, amount: Double, InCategory category:Category, SetTimestamp timestamp: NSString, SetLinuxTimestamp linux_time: Double) {
+    init (id: Int, amount: Double, InCategory category:Category, SetTimestamp timestamp: NSString) {
         self.id = id; // todo: handle id synchronization with database
         self.amount = amount;
         self.timestamp = timestamp
         self.category = category
-        self.timestamp_unix = linux_time
     }
 
 
@@ -83,12 +94,18 @@ struct Expense
 }
 
 
-
-
 class ExpenseDBManager
 {
     var database_path: NSURL;
     var expenseArray: [Expense] = [];
+/*    var database: FMDatabase? = nil
+
+    class var instance: ExpenseDB {
+        sharedExpenseDB.database = FMDatabase(path: Util.getPath("expenseDB.db"))
+        var path = Util.getPath("expenseDB.db")
+        println("path : \(path)")
+        return sharedExpenseDB
+    }*/
     
     
     init () {
@@ -96,16 +113,33 @@ class ExpenseDBManager
         let filemgr = NSFileManager.defaultManager()
         let dirPaths:NSURL?
         // TODO change directort to support files directory- no reason for the user to access the DB
+<<<<<<< HEAD
+//        do {
             dirPaths = try? filemgr.URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+/*        } catch {
+            print ("Error getting file directory")
+            return
+        }*/
         assert(dirPaths != nil)
         database_path = dirPaths!.URLByAppendingPathComponent("expenseDB.db")
         print("Database path: %s", database_path.absoluteString, terminator: "")
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let dirPaths =
+        filemgr.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        
+        let docsDir = dirPaths[0]
+        
+        database_path = docsDir.URLByAppendingPathComponent("expenseDB.db")
+        //print("Database path: %s", database_path as NSString, terminator: "")
+        
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         if database_ref == nil {
             print("Error: \(database_ref.lastErrorMessage())")
         }
         if database_ref.open() {
-            let sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT, DATE_LINUX INTEGER)"
+            let sql_stmt = "CREATE TABLE IF NOT EXISTS EXPENSES (ID INTEGER PRIMARY KEY AUTOINCREMENT, AMOUNT REAL, CATEGORY TEXT, DATE TEXT)"
             if !database_ref.executeStatements(sql_stmt) {
                 print("Error: \(database_ref.lastErrorMessage())")
             }
@@ -115,45 +149,19 @@ class ExpenseDBManager
         else {
             print("Error: \(database_ref.lastErrorMessage())")
         }
-        
-        // updating expense array from DB
-        loadExpenseArray ()
-    }
-    
-    /* load the expense Array from the DB to the local app array */
-    func loadExpenseArray () {
-        let database_ref = FMDatabase(path: database_path.absoluteString)
-        
-        if database_ref.open() {
-            let querySQL = "SELECT * FROM EXPENSES"
-            let results:FMResultSet? = database_ref.executeQuery(querySQL,
-                withArgumentsInArray: nil)
-            if (results?.hasAnotherRow() == nil) {
-            return
-            }
-            
-            while results!.next() {
-                let category  = Category(rawValue: results!.stringForColumn("Category"))
-                let id = results!.intForColumn("id")
-                let amount_result = results!.doubleForColumn("amount")
-                let timestamp = results!.stringForColumn("date")
-                let timestamp_linux = results!.doubleForColumn("date_linux")
-                expenseArray.append(Expense (id: Int(id), amount: amount_result, InCategory: category!, SetTimestamp: timestamp, SetLinuxTimestamp:timestamp_linux))
-            }
-            database_ref.close()
-        } else {
-            print("Error: \(database_ref.lastErrorMessage())")
-        }
-        
     }
     
     func getExpenseArray() -> [Expense] {
         return self.expenseArray
     }
 
-    /* clear the db */
+    
     func clearDB() {
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         
         if database_ref.open() {
             let sql_stmt = "DELETE from EXPENSES"
@@ -164,13 +172,15 @@ class ExpenseDBManager
         } else {
             print("Error: \(database_ref.lastErrorMessage())")
         }
-        expenseArray = [] // clear the local array as well
     }
 
-    /* read an expense by ID */
     func parseExpenseByID (id: Int) -> Expense? {
         var result: Expense
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
 
         
         if database_ref.open() {
@@ -185,8 +195,7 @@ class ExpenseDBManager
                 let id = results!.intForColumn("id")
                 let amount_result = results!.doubleForColumn("amount")
                 let timestamp = results!.stringForColumn("date")
-                let timestamp_linux = results!.doubleForColumn("date_linux")
-                result = Expense (id: Int(id), amount: amount_result, InCategory: category!, SetTimestamp: timestamp, SetLinuxTimestamp:timestamp_linux)
+                result = Expense (id: Int(id), amount: amount_result, InCategory: category!, SetTimestamp: timestamp)
             }
             else {
                 return nil
@@ -199,11 +208,14 @@ class ExpenseDBManager
         }
         return result
     }
-  
-    /* get an array of expenses in the month refered to in the date parameter*/
+    
     func getByMonth (date: NSDate) -> [Expense]? {
         var result: [Expense] = []
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path:"\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         let date_formatter = NSDateFormatter()
         date_formatter.dateFormat = Expense.DATE_FORMAT
         let calendar = NSCalendar.currentCalendar()
@@ -230,8 +242,7 @@ class ExpenseDBManager
                 let id = results!.intForColumn("id")
                 let amount_result = results!.doubleForColumn("amount")
                 let timestamp = results!.stringForColumn("date")
-                let timestamp_linux = results!.doubleForColumn("date_linux")
-                result.append(Expense (id: Int(id), amount: amount_result, InCategory: category!, SetTimestamp: timestamp, SetLinuxTimestamp:timestamp_linux))
+                result.append(Expense (id: Int(id), amount: amount_result, InCategory: category!, SetTimestamp: timestamp))
             }
             database_ref.close()
         } else {
@@ -241,10 +252,13 @@ class ExpenseDBManager
     }
     
     
-    /* return an array of all of the expense amounts */
     func getDoubleExpenseArray()-> [Double] {
         var expense_double_array : [Double] = []
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         
         if database_ref.open() {
             let querySQL = "SELECT amount FROM EXPENSES"
@@ -265,11 +279,15 @@ class ExpenseDBManager
     /* add expense using expense object */
     func addExpense (expense_to_add: Expense) {
         self.expenseArray.append(expense_to_add)
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         
         if database_ref.open() {
             // TODO: get category from parameter & get date
-            let insertSQL = "INSERT INTO EXPENSES (amount, category, date, date_linux) VALUES ('\(expense_to_add.amount)', 'Fuel', '\(expense_to_add.timestamp)', '\(expense_to_add.timestamp_unix as Double)')"
+            let insertSQL = "INSERT INTO EXPENSES (amount, category, date) VALUES ('\(expense_to_add.amount)', 'Fuel', '\(expense_to_add.timestamp)')"
             
             let result = database_ref.executeUpdate(insertSQL,
                 withArgumentsInArray: nil)
@@ -286,15 +304,19 @@ class ExpenseDBManager
     }
 
    
-    /* add expense using expense details (timestamp is current time) */
+    /* add expense using expense details */
     func addExpense (amount:Double, InCategory category:Category) {
         let added_expense = Expense(id: self.expenseArray.count, amount:amount, InCategory: category)
         self.expenseArray.append(added_expense)
+<<<<<<< HEAD
         let database_ref = FMDatabase(path: database_path.absoluteString)
+=======
+        let database_ref = FMDatabase(path: "\(database_path)")
+>>>>>>> Feature-currentStatus-byMonth-swift2
         
         if database_ref.open() {
             // TODO: get category from parameter & get date
-            let insertSQL = "INSERT INTO EXPENSES (amount, category, date, date_linux) VALUES ('\(amount)', 'Fuel', '\(added_expense.getTimestamp())', '\(added_expense.timestamp_unix)')"
+            let insertSQL = "INSERT INTO EXPENSES (amount, category, date) VALUES ('\(amount)', 'Fuel', '\(added_expense.getTimestamp())')"
             
             let result = database_ref.executeUpdate(insertSQL,
                 withArgumentsInArray: nil)
