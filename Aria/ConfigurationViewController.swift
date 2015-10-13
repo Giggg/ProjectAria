@@ -24,6 +24,5 @@ class ConfigurationViewController: UIViewController {
         print(sharedStatusModel.definedBudget)
 
     }
-    
-    
+
 }
